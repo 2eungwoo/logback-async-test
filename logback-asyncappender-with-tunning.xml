@@ -1,40 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<configuration>-->
 
-  <property name="LOG_PATH" value="logs" />
+<!--  <property name="LOG_PATH" value="logs" />-->
 
-  <!-- ✅ [5] 최소 로그 패턴: level + message만 사용 -->
-  <property name="LOG_PATTERN" value="%-5level - %msg%n" />
+<!--  &lt;!&ndash; ✅ [5] 최소 로그 패턴: level + message만 사용 &ndash;&gt;-->
+<!--  <property name="LOG_PATTERN" value="%-5level - %msg%n" />-->
 
-  <!-- ✅ [7] SiftingAppender: loggerClass 기반 분기 -->
-  <appender name="SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
-    <discriminator class="ch.qos.logback.classic.sift.MDCBasedDiscriminator">
-      <key>loggerClass</key>
-      <defaultValue>default</defaultValue>
-    </discriminator>
-    <sift>
-      <appender name="FILE-${loggerClass}" class="ch.qos.logback.core.FileAppender">
-        <!-- ✅ [6] ConsoleAppender 제거하고 파일로만 기록 -->
-        <file>${LOG_PATH}/log-${loggerClass}.log</file>
-        <append>true</append>
-        <encoder>
-          <pattern>${LOG_PATTERN}</pattern>
-        </encoder>
-      </appender>
-    </sift>
-  </appender>
+<!--  &lt;!&ndash; ✅ [7] SiftingAppender: loggerClass 기반 분기 &ndash;&gt;-->
+<!--  <appender name="SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">-->
+<!--    <discriminator class="ch.qos.logback.classic.sift.MDCBasedDiscriminator">-->
+<!--      <key>loggerClass</key>-->
+<!--      <defaultValue>default</defaultValue>-->
+<!--    </discriminator>-->
+<!--    <sift>-->
+<!--      <appender name="FILE-${loggerClass}" class="ch.qos.logback.core.FileAppender">-->
+<!--        &lt;!&ndash; ✅ [6] ConsoleAppender 제거하고 파일로만 기록 &ndash;&gt;-->
+<!--        <file>${LOG_PATH}/log-${loggerClass}.log</file>-->
+<!--        <append>true</append>-->
+<!--        <encoder>-->
+<!--          <pattern>${LOG_PATTERN}</pattern>-->
+<!--        </encoder>-->
+<!--      </appender>-->
+<!--    </sift>-->
+<!--  </appender>-->
 
-  <!-- ✅ [2] AsyncAppender 성능 튜닝 -->
-  <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
-    <queueSize>10000</queueSize>                <!-- 기본보다 큰 큐 -->
-    <discardingThreshold>0</discardingThreshold> <!-- 유실 방지 -->
-    <includeCallerData>false</includeCallerData> <!-- 성능 향상 -->
-    <appender-ref ref="SIFT" />
-  </appender>
+<!--  &lt;!&ndash; ✅ [2] AsyncAppender 성능 튜닝 &ndash;&gt;-->
+<!--  <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">-->
+<!--    <queueSize>10000</queueSize>                &lt;!&ndash; 기본보다 큰 큐 &ndash;&gt;-->
+<!--    <discardingThreshold>0</discardingThreshold> &lt;!&ndash; 유실 방지 &ndash;&gt;-->
+<!--    <includeCallerData>false</includeCallerData> &lt;!&ndash; 성능 향상 &ndash;&gt;-->
+<!--    <appender-ref ref="SIFT" />-->
+<!--  </appender>-->
 
-  <!-- ✅ [1][4] 루트 로거: CONSOLE 제거, 쓰레드/로거명 제외된 패턴 사용 -->
-  <root level="INFO">
-    <appender-ref ref="ASYNC" />
-  </root>
+<!--  &lt;!&ndash; ✅ [1][4] 루트 로거: CONSOLE 제거, 쓰레드/로거명 제외된 패턴 사용 &ndash;&gt;-->
+<!--  <root level="INFO">-->
+<!--    <appender-ref ref="ASYNC" />-->
+<!--  </root>-->
 
-</configuration>
+<!--</configuration>-->
