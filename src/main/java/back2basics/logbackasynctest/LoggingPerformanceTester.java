@@ -11,10 +11,7 @@ public class LoggingPerformanceTester {
 
     @PostConstruct
     public void runLoggingTest() {
-        final int COUNT = 1000000; // 실험할 로그 수
-
-        // 🔵 [3] 클래스명 기반 logger → SiftingAppender에서 구분
-        MDC.put("loggerClass", this.getClass().getSimpleName());
+        final int COUNT = 1_000_000;
 
         log.info("===== Logging performance test started: {} messages =====", COUNT);
         long start = System.currentTimeMillis();
@@ -24,9 +21,9 @@ public class LoggingPerformanceTester {
         }
 
         long end = System.currentTimeMillis();
-        log.info("===== Logging finished in {} ms =====", (end - start));
-        log.info("===== Throughput: {} logs/sec =====", COUNT * 1000L / (end - start));
+        long duration = end - start;
 
-        MDC.clear(); // 🔵 clear
+        log.info("===== Logging finished in {} ms =====", duration);
+        log.info("===== Throughput: {} logs/sec =====", COUNT * 1000L / duration);
     }
 }
