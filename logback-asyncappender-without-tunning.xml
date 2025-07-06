@@ -1,0 +1,27 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<configuration>-->
+
+<!--  <property name="LOG_PATH" value="logs" />-->
+
+<!--  &lt;!&ndash; 기본적으로 가장 무거운 로그 패턴 &ndash;&gt;-->
+<!--  <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />-->
+
+<!--  &lt;!&ndash; 콘솔 출력 &ndash;&gt;-->
+<!--  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--    <encoder>-->
+<!--      <pattern>${LOG_PATTERN}</pattern>-->
+<!--    </encoder>-->
+<!--  </appender>-->
+
+<!--  &lt;!&ndash; ✅ [1] AsyncAppender만 적용 &ndash;&gt;-->
+<!--  <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">-->
+<!--    <appender-ref ref="FILE" />-->
+<!--  </appender>-->
+
+<!--  &lt;!&ndash; 기본 설정만 적용된 루트 로거 &ndash;&gt;-->
+<!--  <root level="INFO">-->
+<!--    <appender-ref ref="CONSOLE"/>-->
+<!--    <appender-ref ref="FILE"/>-->
+<!--  </root>-->
+
+<!--</configuration>-->
