@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!-- ✅ 공통 설정 -->
+  <property name="LOG_PATH" value="logs" />
+  <property name="LOG_PATTERN" value="%level - %msg%n" /> <!-- [4], [5]: logger/thread 제거 + 단순 패턴 -->
+
+  <!-- ✅ [6] ConsoleAppender → 파일로 리디렉션 효과 확인 -->
+  <appender name="CONSOLE" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_PATH}/console-redirect.log</file>
+    <append>true</append>
+    <encoder>
+      <pattern>${LOG_PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+  <!-- ✅ [7] SiftingAppender: loggerClass 기반 파일 분기 -->
+  <appender name="SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
+    <discriminator class="ch.qos.logback.classic.sift.MDCBasedDiscriminator">
+      <key>loggerClass</key>
+      <defaultValue>default</defaultValue>
+    </discriminator>
+    <sift>
+      <appender name="SIFTED_FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_PATH}/sifted-%loggerClass%.log</file>
+        <append>true</append>
+        <encoder>
+          <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+      </appender>
+    </sift>
+  </appender>
+
+  <!-- ✅ [1], [2]: AsyncAppender 최적화 적용 -->
+  <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <queueSize>10000</queueSize>
+    <discardingThreshold>0</discardingThreshold>
+    <includeCallerData>false</includeCallerData>
+    <appender-ref ref="SIFT" />
+  </appender>
+
+  <!-- ✅ 루트 로거: CONSOLE(Log파일), ASYNC(→SIFTED_FILE) -->
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="ASYNC"/>
+  </root>
+
+</configuration>
