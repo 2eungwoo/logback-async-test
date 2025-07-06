@@ -1,31 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<configuration>-->
 
-  <property name="LOG_PATH" value="logs" />
+<!--  <property name="LOG_PATH" value="logs" />-->
 
-  <!-- ✅ 단순 로그 패턴: level + message만 -->
-  <property name="LOG_PATTERN" value="%-5level - %msg%n" />
+<!--  &lt;!&ndash; ✅ 단순 로그 패턴: level + message만 &ndash;&gt;-->
+<!--  <property name="LOG_PATTERN" value="%-5level - %msg%n" />-->
 
-  <!-- 콘솔 출력 -->
-  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-    <encoder>
-      <pattern>${LOG_PATTERN}</pattern>
-    </encoder>
-  </appender>
+<!--  &lt;!&ndash; 콘솔 출력 &ndash;&gt;-->
+<!--  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--    <encoder>-->
+<!--      <pattern>${LOG_PATTERN}</pattern>-->
+<!--    </encoder>-->
+<!--  </appender>-->
 
-  <!-- 동기 FileAppender (Async 미사용) -->
-  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-    <file>${LOG_PATH}/baseline-simple-pattern.log</file>
-    <append>true</append>
-    <encoder>
-      <pattern>${LOG_PATTERN}</pattern>
-    </encoder>
-  </appender>
+<!--  &lt;!&ndash; 동기 FileAppender (Async 미사용) &ndash;&gt;-->
+<!--  <appender name="FILE" class="ch.qos.logback.core.FileAppender">-->
+<!--    <file>${LOG_PATH}/baseline-simple-pattern.log</file>-->
+<!--    <append>true</append>-->
+<!--    <encoder>-->
+<!--      <pattern>${LOG_PATTERN}</pattern>-->
+<!--    </encoder>-->
+<!--  </appender>-->
 
-  <!-- 루트 로거: 동기 로깅, 단순 패턴만 변경 -->
-  <root level="INFO">
-    <appender-ref ref="CONSOLE"/>
-    <appender-ref ref="FILE"/>
-  </root>
+<!--  &lt;!&ndash; 루트 로거: 동기 로깅, 단순 패턴만 변경 &ndash;&gt;-->
+<!--  <root level="INFO">-->
+<!--    <appender-ref ref="CONSOLE"/>-->
+<!--    <appender-ref ref="FILE"/>-->
+<!--  </root>-->
 
-</configuration>
+<!--</configuration>-->
