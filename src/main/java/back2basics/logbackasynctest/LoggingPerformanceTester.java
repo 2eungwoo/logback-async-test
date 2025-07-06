@@ -13,6 +13,9 @@ public class LoggingPerformanceTester {
     public void runLoggingTest() {
         final int COUNT = 1_000_000;
 
+        // ✅ [3] Logger 이름을 클래스명으로 지정 (MDC 설정 → SiftingAppender 용)
+        MDC.put("loggerClass", this.getClass().getSimpleName());
+
         log.info("===== Logging performance test started: {} messages =====", COUNT);
         long start = System.currentTimeMillis();
 
@@ -25,5 +28,7 @@ public class LoggingPerformanceTester {
 
         log.info("===== Logging finished in {} ms =====", duration);
         log.info("===== Throughput: {} logs/sec =====", COUNT * 1000L / duration);
+
+        MDC.clear(); // ✅ MDC 클리어
     }
 }
