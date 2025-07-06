@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <property name="LOG_PATH" value="logs" />
+  <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>${LOG_PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+  <!-- ✅ AsyncAppender에서 사용할 FileAppender -->
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>${LOG_PATH}/async2.log</file>
+    <append>true</append>
+    <encoder>
+      <pattern>${LOG_PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+  <!-- ✅ [2] AsyncAppender 성능 튜닝 -->
+  <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <queueSize>10000</queueSize>                <!-- 로그 버퍼 크기 (기본: 256) -->
+    <discardingThreshold>0</discardingThreshold> <!-- 버퍼가 가득 차도 로그 유실 방지 -->
+    <includeCallerData>false</includeCallerData> <!-- 호출자 정보 추적 OFF (성능 개선) -->
+    <appender-ref ref="FILE" />
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="CONSOLE" />
+    <appender-ref ref="ASYNC" />
+  </root>
+
+</configuration>
