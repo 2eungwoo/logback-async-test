@@ -11,7 +11,7 @@ public class LoggingPerformanceTester {
 
     @PostConstruct
     public void runLoggingTest() {
-        final int COUNT = 100_000; // 실험할 로그 수
+        final int COUNT = 1000000; // 실험할 로그 수
 
         // 🔵 [3] 클래스명 기반 logger → SiftingAppender에서 구분
         MDC.put("loggerClass", this.getClass().getSimpleName());
